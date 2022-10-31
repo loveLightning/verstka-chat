@@ -2,38 +2,45 @@ import React from 'react'
 import { questions } from './types'
 import msg from '../../assets/images/msg.svg'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-export const Questions = () => {
-    const str = 'У меня получился такой "мудборд" из парочки моих работ в сравнениис "рефами" - работами моей коллеги, с моими комментами. И подборка стилей иллюстрации, которые мне очень нравятся. Каким может быть задание для'
-    console.log(str.length)
+interface Props {
+    topicTitle: string
+}
+
+export const Questions: React.FC<Props> = ({ topicTitle }) => {
     return (
         <Wrapper>
             {questions?.map(el => (
-                <Card key={el.id}>
-                    <User>
-                        <ImageVatar src={el.url} alt="Avatar" />
-                        <Name>{el.name}</Name>
-                        <img src={el.uriName} alt="Logo-name" />
-                    </User>
-                    <Desc>
-                        <p>{el.desc.length < 209 ? el.desc : el.desc.split('').splice(0, 209).join('')}</p>
-                        <Shadow></Shadow>
-                    </Desc>
-                    <OtherInfo>
-                        <div>
-                            <p>{el.topic}</p>
-                        </div>
-                        <WrapperInfo>
-                            <Messages>
-                                <span>{el.messages}</span>
-                                <img src={msg} alt="Message" />
-                            </Messages>
-                            <Date>
-                                <span>{el.date}</span>
-                            </Date>
-                        </WrapperInfo>
-                    </OtherInfo>
-                </Card>
+                <WrapperCard key={el.id}>
+                    <Card>
+                        <Link to='/question'>
+                            <User>
+                                <ImageVatar src={el.url} alt="Avatar" />
+                                <Name>{el.name}</Name>
+                                <img src={el.uriName} alt="Logo-name" />
+                            </User>
+                            <Desc>
+                                <p>{el.desc.length < 209 ? el.desc : el.desc.split('').splice(0, 209).join('')}</p>
+                                <Shadow></Shadow>
+                            </Desc>
+                            <OtherInfo>
+                                <div>
+                                    {topicTitle && <p>#{topicTitle}</p>}
+                                </div>
+                                <WrapperInfo>
+                                    <Messages>
+                                        <span>{el.messages}</span>
+                                        <img src={msg} alt="Message" />
+                                    </Messages>
+                                    <Date>
+                                        <span>{el.date}</span>
+                                    </Date>
+                                </WrapperInfo>
+                            </OtherInfo>
+                        </Link>
+                    </Card>
+                </WrapperCard>
             ))}
         </Wrapper>
     )
@@ -45,12 +52,16 @@ const Wrapper = styled.div`
     gap: 20px;
 `
 
+const WrapperCard = styled.div`
+    max-width: 818px;
+`
+
 const Card = styled.div`
     padding: 30px;
     background-color: ${({ theme }) => theme.darkGrey};
-    width: 818px;
     border-radius: 30px;
     color: ${({ theme }) => theme.white};
+    width: 100%;
 `
 
 const User = styled.div`

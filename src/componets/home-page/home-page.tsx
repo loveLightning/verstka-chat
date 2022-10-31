@@ -1,31 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import community from '../../assets/images/community.png'
+import { device } from '../../utils/constants'
 import { Container } from '../styles'
 import { Questions } from './questions'
 import { SideBar } from './side-bar'
+import list from '../../assets/images/list.svg'
 
 export const HomePage = () => {
 
-    const selectQuestions = (id: number, el: string): void => {
-        console.log(id, el)
-    }
+  const [isActiveTopic, setIsActiveTopic] = useState<number>(0)
+  const [topicTitle, setTopicTitle] = useState<string>('Все')
+  const [activeCategories, setActiveCategories] = useState<boolean>(false)
 
-    return (
-        <Container>
-            <WrapperTitle>
-                <Link to="/new-question">
-                    <Title><Fragment>Задайте вопрос</Fragment> уютному сообществу <Image></Image> дизайнеров, вместе проще разобраться</Title>
-                </Link>
-            </WrapperTitle>
-            <Content>
-                <SideBar selectQuestions={selectQuestions} />
-                <Questions />
-            </Content>
+  const selectItem = (id: number, el: string): void => {
+    setIsActiveTopic(id)
+    setTopicTitle(el)
+    setActiveCategories(false)
+  }
 
-        </Container>
-    )
+  return (
+    <Container>
+      <WrapperTitle>
+        <Link to="/new-question">
+          <Title><Fragment>Задайте вопрос</Fragment> уютному сообществу <Image></Image> дизайнеров, вместе проще разобраться</Title>
+        </Link>
+      </WrapperTitle>
+      <AllCategories onClick={() => setActiveCategories(!activeCategories)}>
+        <WrapperCategories>
+          <TitleCategories>{topicTitle === 'Все' ? 'Все категории' : topicTitle}</TitleCategories>
+          <img src={list} alt="list" />
+        </WrapperCategories>
+      </AllCategories>
+      <Content>
+        <SideBar activeCategories={activeCategories} isActive={isActiveTopic} selectItem={selectItem} />
+        <Questions topicTitle={topicTitle} />
+      </Content>
+    </Container>
+  )
 }
 
 const Title = styled.h1`
@@ -65,8 +78,51 @@ const Image = styled.span`
   }
 `
 
+const AllCategories = styled.div`
+  display: none;
+  width: 100%;
+  background-color: ${({ theme }) => theme.darkGrey};
+  margin: 0 auto;
+  height: 55px;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  @media ${device.mobileS} {
+    display: block;
+  }
+  @media ${device.laptop} {
+    display: none;
+  }
+`
+
+const WrapperCategories = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  
+`
+
+const TitleCategories = styled.p`
+  color: ${({theme}) => theme.white};
+  font-size: 17px;
+  line-height: 134.3%;
+`
+
 const Content = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    position: relative;
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.laptop} {
+      gap: 40px;
+
+    }
+    @media ${device.laptopL} {
+      gap: 20px;
+    }
 `
