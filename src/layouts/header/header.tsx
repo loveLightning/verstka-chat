@@ -30,11 +30,7 @@ export const Layout: React.FC = () => {
                             <Item>
                                 <StyledNavLink to="/auth/login">Войти</StyledNavLink>
                                 <Link to="/"><img src={search} alt="Search" /></Link>
-                                <Burger>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </Burger>
+                               
                             </Item>
                         </Menu>
                     </nav>
