@@ -1,8 +1,8 @@
 import React from 'react'
-import { questions } from './types'
 import msg from '../../assets/images/msg.svg'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { questions } from '../types'
 
 interface Props {
     topicTitle: string
@@ -11,10 +11,10 @@ interface Props {
 export const Questions: React.FC<Props> = ({ topicTitle }) => {
     return (
         <Wrapper>
-            {questions?.map(el => (
+            {questions?.map((el, id) => (
                 <WrapperCard key={el.id}>
                     <Card>
-                        <Link to='/question'>
+                        <LinkCard to={`question/${id}`} state={{ topic: topicTitle }}>
                             <User>
                                 <ImageVatar src={el.url} alt="Avatar" />
                                 <Name>{el.name}</Name>
@@ -26,7 +26,9 @@ export const Questions: React.FC<Props> = ({ topicTitle }) => {
                             </Desc>
                             <OtherInfo>
                                 <div>
-                                    {topicTitle && <p>#{topicTitle}</p>}
+                                    <Link to='/'>
+                                        {topicTitle && <Topic>#{topicTitle}</Topic>}
+                                    </Link>
                                 </div>
                                 <WrapperInfo>
                                     <Messages>
@@ -38,7 +40,7 @@ export const Questions: React.FC<Props> = ({ topicTitle }) => {
                                     </Date>
                                 </WrapperInfo>
                             </OtherInfo>
-                        </Link>
+                        </LinkCard>
                     </Card>
                 </WrapperCard>
             ))}
@@ -54,6 +56,10 @@ const Wrapper = styled.div`
 
 const WrapperCard = styled.div`
     max-width: 818px;
+`
+
+const LinkCard = styled(Link)`
+    color: ${({ theme }) => theme.white};
 `
 
 const Card = styled.div`
@@ -84,6 +90,11 @@ const Desc = styled.div`
     font-size: 20px;
     line-height: 27px;
     position: relative;
+`
+
+const Topic = styled.p`
+    color: ${({ theme }) => theme.grey};
+    z-index: 12;
 `
 
 const Shadow = styled.div`

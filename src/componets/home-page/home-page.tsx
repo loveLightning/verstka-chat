@@ -23,9 +23,9 @@ export const HomePage = () => {
   return (
     <Container>
       <WrapperTitle>
-        <Link to="/new-question">
+        <TitleLink to="/new-question">
           <Title><Fragment>Задайте вопрос</Fragment> уютному сообществу <Image></Image> дизайнеров, вместе проще разобраться</Title>
-        </Link>
+        </TitleLink>
       </WrapperTitle>
       <AllCategories onClick={() => setActiveCategories(!activeCategories)}>
         <WrapperCategories>
@@ -48,6 +48,9 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.white};
   position: relative;
   margin-bottom: 70px;
+  @media ${device.tablet} {
+    font-size: 40px;
+  }
 `
 
 const Fragment = styled.span`
@@ -59,12 +62,16 @@ const Fragment = styled.span`
     display: block;
     position: absolute;
     bottom: 5px;
-    width: 489px;
+    width: 100%;
   }
 `
 
 const WrapperTitle = styled.div`
   max-width: 950px;
+`
+
+const TitleLink = styled(Link)`
+  color: ${({ theme }) => theme.white};
 `
 
 const Image = styled.span`
@@ -88,11 +95,8 @@ const AllCategories = styled.div`
   padding: 16px;
   margin-bottom: 40px;
   cursor: pointer;
-  @media ${device.mobileS} {
-    display: block;
-  }
-  @media ${device.laptop} {
-    display: none;
+  @media ${device.tablet} {
+    display: block
   }
 `
 
@@ -105,7 +109,7 @@ const WrapperCategories = styled.div`
 `
 
 const TitleCategories = styled.p`
-  color: ${({theme}) => theme.white};
+  color: ${({ theme }) => theme.white};
   font-size: 17px;
   line-height: 134.3%;
 `
@@ -115,14 +119,9 @@ const Content = styled.div`
     align-items: flex-start;
     justify-content: space-between;
     position: relative;
-    @media ${device.tablet} {
-      
-    }
-    @media ${device.laptop} {
-      gap: 40px;
-
-    }
-    @media ${device.laptopL} {
-      gap: 20px;
+    gap: 40px;
+    margin-bottom: 150px;
+    @media ${device.mobileM} {
+      margin-bottom: 80px;
     }
 `

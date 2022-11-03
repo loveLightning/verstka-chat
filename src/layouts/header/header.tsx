@@ -5,18 +5,13 @@ import { Container } from '../../componets/styles'
 import search from '../../assets/images/search.svg'
 import logo from '../../assets/images/logo.svg'
 import { device } from '../../utils/constants'
+import { MenuHeader } from '../../componets'
 
 export const Layout: React.FC = () => {
-
-    const [isMenuOpen, toggleMenu] = useState(false);
-
-    const toggleMenuMode = () => {
-        toggleMenu(!isMenuOpen);
-      }
-
+    const [open, setOpen] = useState<boolean>(false);
     return (
         <Wrapper>
-            <Header>
+            <Header >
                 <Container>
                     <nav>
                         <Menu>
@@ -29,8 +24,8 @@ export const Layout: React.FC = () => {
                             </Item>
                             <Item>
                                 <StyledNavLink to="/auth/login">Войти</StyledNavLink>
-                                <Link to="/"><img src={search} alt="Search" /></Link>
-                               
+                                <LinkSearch to="/"><img src={search} alt="Search" /></LinkSearch>
+                                <MenuHeader open={open} setOpen={setOpen} />
                             </Item>
                         </Menu>
                     </nav>
@@ -42,7 +37,6 @@ export const Layout: React.FC = () => {
 }
 
 const StyledNavLink = styled(NavLink)`
-    display: block;
     position: relative;
     text-decoration: ${(props) => {
         return props.style ? (isActive) => (isActive ? "underline" : "none") : "none";
@@ -50,13 +44,10 @@ const StyledNavLink = styled(NavLink)`
     color: ${({ theme }) => theme.grey};
     transition: 0.4s ease all;
     :hover {
-        color: ${({theme}) => theme.white};
-    }
-    @media ${device.mobileL} {
-        display: none;
+        color: ${({ theme }) => theme.white};
     }
     @media ${device.tablet} {
-        display: block;
+        display: none;
     }
 `;
 
@@ -92,7 +83,12 @@ const InfoLink = styled.div`
     display: flex;
     align-items: center;
     gap: 40px;
-    @media ${device.mobileL} {
-        
+`
+
+const LinkSearch = styled(Link)`
+    @media ${device.tablet} {
+        position: absolute;
+        top: 45px;
+        right: 90px;
     }
 `

@@ -9,7 +9,7 @@ const ScreensRoot = () => (
     <Routes>
         <Route path="/" element={<Layout />}>
             <Route index element={<HomePageScreen />} />
-            <Route path='question' element={<QuestionScreen />} />
+            <Route path='question/:id' element={<QuestionScreen />} />
         </Route>
         <Route>
             <Route path='/new-question' />

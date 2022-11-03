@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
+    background-color: black;
     font-family: 'Gilroy', sans-serif;
     padding: 0;
     margin: 0;

@@ -1,0 +1,1 @@
+export { QuestionDesc } from './question-desc'
