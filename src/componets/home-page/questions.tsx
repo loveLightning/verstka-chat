@@ -15,31 +15,33 @@ export const Questions: React.FC<Props> = ({ topicTitle }) => {
                 <WrapperCard key={el.id}>
                     <Card>
                         <LinkCard to={`question/${id}`} state={{ topic: topicTitle }}>
-                            <User>
-                                <ImageVatar src={el.url} alt="Avatar" />
-                                <Name>{el.name}</Name>
-                                <img src={el.uriName} alt="Logo-name" />
-                            </User>
-                            <Desc>
-                                <p>{el.desc.length < 209 ? el.desc : el.desc.split('').splice(0, 209).join('')}</p>
-                                <Shadow></Shadow>
-                            </Desc>
-                            <OtherInfo>
-                                <div>
-                                    <Link to='/'>
-                                        {topicTitle && <Topic>#{topicTitle}</Topic>}
-                                    </Link>
-                                </div>
-                                <WrapperInfo>
-                                    <Messages>
-                                        <span>{el.messages}</span>
-                                        <img src={msg} alt="Message" />
-                                    </Messages>
-                                    <Date>
-                                        <span>{el.date}</span>
-                                    </Date>
-                                </WrapperInfo>
-                            </OtherInfo>
+                            <Wrap>
+                                <User>
+                                    <ImageVatar src={el.url} alt="Avatar" />
+                                    <Name>{el.name}</Name>
+                                    <img src={el.uriName} alt="Logo-name" />
+                                </User>
+                                <Desc>
+                                    <p>{el.desc.length < 209 ? el.desc : el.desc.split('').splice(0, 209).join('')}</p>
+                                    <Shadow></Shadow>
+                                </Desc>
+                                <OtherInfo>
+                                    <div>
+                                        <Link to='/'>
+                                            {topicTitle && <Topic>#{topicTitle}</Topic>}
+                                        </Link>
+                                    </div>
+                                    <WrapperInfo>
+                                        <Messages>
+                                            <span>{el.messages}</span>
+                                            <img src={msg} alt="Message" />
+                                        </Messages>
+                                        <Date>
+                                            <span>{el.date}</span>
+                                        </Date>
+                                    </WrapperInfo>
+                                </OtherInfo>
+                            </Wrap>
                         </LinkCard>
                     </Card>
                 </WrapperCard>
@@ -58,12 +60,15 @@ const WrapperCard = styled.div`
     max-width: 818px;
 `
 
+const Wrap = styled.div`
+    padding: 30px;
+`
+
 const LinkCard = styled(Link)`
     color: ${({ theme }) => theme.white};
 `
 
 const Card = styled.div`
-    padding: 30px;
     background-color: ${({ theme }) => theme.darkGrey};
     border-radius: 30px;
     color: ${({ theme }) => theme.white};
