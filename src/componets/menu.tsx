@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useOnClickOutside } from "../hooks";
 import { device } from "../utils/constants";
 
 import { Hamburger } from "./burger";
+import { UserContext } from "./context/user";
 
 const Wrapper = styled.div`
   display: none;
@@ -17,9 +17,9 @@ const StyledMenu = styled.div<{ open: boolean }>`
   top: 0;
   left: 0;
   height: 100vh;
-  width: 50vw;
+  width: 100vw;
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   padding: 10rem 0;
   flex-direction: column;
   background-color: ${({ theme }) => theme.darkGrey};
@@ -32,23 +32,24 @@ const StyledMenu = styled.div<{ open: boolean }>`
     width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background-color: ${({theme}) => theme.darkGrey};
+    background-color: ${({ theme }) => theme.darkGrey};
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: ${({theme}) => theme.grey};
+    background-color: ${({ theme }) => theme.grey};
     border-radius: 10px;
   }
 `;
-const StyledLink = styled(Link)`
+interface Styled {
+  active?: string
+}
+const StyledLink = styled(Link)<Styled>`
   width: fit-content;
-  margin-bottom: 30px; 
   font-size: 2rem;
   text-decoration: none;
-  margin-right: auto;
-  margin-right: 16px;
-  margin-left: 30px;
-  color: ${({theme}) => theme.white};
+  margin: 0 auto;
+  margin-bottom: 30px; 
+  color: ${({ theme, active }) => active ? theme.red : theme.white};
   
   :hover {
     cursor: pointer;
@@ -57,18 +58,12 @@ const StyledLink = styled(Link)`
     font-size: 22px;
   }
 `;
-const MenuWrapper = styled.div<{open: boolean}>`
+const MenuWrapper = styled.div<{ open: boolean }>`
   transition: 0.3s ease all;
-  opacity: ${({open}) => open ? 1 : 0};
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  opacity: ${({ open }) => open ? 1 : 0};
   position: fixed;
   background-color: rgba(0,0,0,0.9);
-  z-index: 1;
+  z-index: 2;
 `
 
 type Props = {
@@ -78,16 +73,29 @@ type Props = {
 
 export const MenuHeader: React.FC<Props> = ({ open, setOpen }) => {
   const close = () => setOpen(false);
-  const node = useRef<HTMLDivElement>(null);
-  useOnClickOutside(node, () => setOpen(false));
+  const [user, setUser] = useContext(UserContext)
+
+  const logout = () => {
+    console.log(user)
+    setUser({
+        auth: ''
+    })
+}
 
   return (
     <Wrapper>
       <MenuWrapper open={open} >
-        <StyledMenu open={open}  ref={node}>
+        <StyledMenu open={open} >
           <StyledLink to='/' onClick={() => close()}>Вопросы</StyledLink>
-          <StyledLink to='/' onClick={() => close()}>О проекте</StyledLink>
-          <StyledLink to='/' onClick={() => close()}>Войти</StyledLink>
+          <StyledLink to='/about-us' onClick={() => close()}>О проекте</StyledLink>
+
+          {user.auth ? <StyledLink to='/profile' onClick={() => close()}>Андрей</StyledLink> : <StyledLink to='/auth/login' onClick={() => close()}>Войти</StyledLink>}
+          
+          {user.auth ? <>
+            <StyledLink to='/my-questions' onClick={() => close()}>Ваши вопросы</StyledLink>
+            <StyledLink to='/profile' onClick={() => close()}>Личные данные</StyledLink>
+            <StyledLink active="true"  onClick={logout} to='/'>Выйти</StyledLink>
+          </> : ''}
         </StyledMenu>
       </MenuWrapper>
       <Hamburger open={open} setOpen={setOpen} />

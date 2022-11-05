@@ -1,0 +1,94 @@
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { emoji, Props } from './types'
+import close from '../../assets/images/close.svg'
+import { Link } from 'react-router-dom'
+import { device } from '../../utils/constants'
+
+export const HeaderEmoji = () => {
+    const [dataEmoji, setDataEmoji] = useState<Props[]>([])
+    const [value, setValue] = useState('0')
+    useEffect(() => {
+        setDataEmoji(emoji)
+    }, [dataEmoji])
+
+    return (
+        <Wrapper>
+            <WrapperEmoji>
+                {dataEmoji && dataEmoji?.map((emoji, id) => (
+                    <Label key={emoji.id}>
+                        <Input type='radio' checked={emoji.id === value} onChange={() => setValue(emoji.id)} />
+                        <InnerLabel>
+                            <Emoji key={emoji.id} src={emoji.src} alt={emoji.title} />
+                        </InnerLabel>
+                    </Label>
+                ))}
+            </WrapperEmoji>
+            <Link to='/'>
+                <Close src={close} alt='Close' />
+            </Link>
+
+        </Wrapper>
+    )
+}
+
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 37px 0px 57px 0;
+    justify-content: space-between;
+    @media ${device.tablet} {
+        padding-top: 20px;
+        padding-bottom: 27px;
+    }
+`
+
+const WrapperEmoji = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    @media ${device.tablet} {
+        gap: 20px;
+    }
+`
+
+const Emoji = styled.img`
+    position: relative;
+    z-index: 1; 
+`
+
+const Close = styled.img`
+`
+
+const Input = styled.input`
+    display: none;
+    :checked + div::before {
+        background-color: ${({theme}) => theme.white}
+    }
+`
+
+const Label = styled.label`
+`
+
+const InnerLabel = styled.div`
+    cursor: pointer;
+    position: relative;
+   
+    ::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -54%);
+        border-radius: 50%;
+        background-color: ${({ theme }) => theme.darkGrey};
+        width: 50px;
+        height: 50px;
+
+        @media ${device.tablet} {
+            width: 40px;
+            height: 40px;
+        }
+    }
+` 

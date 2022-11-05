@@ -1,25 +1,38 @@
 import React from 'react'
-import msg from '../../assets/images/msg.svg'
+import msg from '../assets/images/msg.svg'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { questions } from '../types'
+import { questions } from './types'
+import trash from '../assets/images/trash.svg'
+import edit from '../assets/images/edit.svg'
+import { device } from '../utils/constants'
 
 interface Props {
-    topicTitle: string
+    topicTitle?: string
+    editable?: boolean
 }
 
-export const Questions: React.FC<Props> = ({ topicTitle }) => {
+export const Questions: React.FC<Props> = ({ topicTitle = 'Все', editable = false }) => {
+
     return (
         <Wrapper>
             {questions?.map((el, id) => (
                 <WrapperCard key={el.id}>
                     <Card>
-                        <LinkCard to={`question/${id}`} state={{ topic: topicTitle }}>
+                        {editable && <WrapperEditable>
+                            <Link to='/edit-question'>
+                                <ImageEditable src={edit} alt='Edit' />
+                            </Link>
+                            <ImageTrash src={trash} alt='Trash' />
+                        </WrapperEditable>}
+                        <LinkCard to={`/question/${id}`} state={{ topic: topicTitle }}>
                             <Wrap>
                                 <User>
-                                    <ImageVatar src={el.url} alt="Avatar" />
-                                    <Name>{el.name}</Name>
-                                    <img src={el.uriName} alt="Logo-name" />
+                                    <WrapperUser>
+                                        <ImageVatar src={el.url} alt="Avatar" />
+                                        <Name>{el.name}</Name>
+                                        <img src={el.uriName} alt="Logo-name" />
+                                    </WrapperUser>
                                 </User>
                                 <Desc>
                                     <p>{el.desc.length < 209 ? el.desc : el.desc.split('').splice(0, 209).join('')}</p>
@@ -27,9 +40,9 @@ export const Questions: React.FC<Props> = ({ topicTitle }) => {
                                 </Desc>
                                 <OtherInfo>
                                     <div>
-                                        <Link to='/'>
+                                        <div>
                                             {topicTitle && <Topic>#{topicTitle}</Topic>}
-                                        </Link>
+                                        </div>
                                     </div>
                                     <WrapperInfo>
                                         <Messages>
@@ -54,6 +67,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 100px;
 `
 
 const WrapperCard = styled.div`
@@ -73,12 +87,14 @@ const Card = styled.div`
     border-radius: 30px;
     color: ${({ theme }) => theme.white};
     width: 100%;
+    position: relative;
 `
 
 const User = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 16px;
+    justify-content: space-between;
 `
 
 const ImageVatar = styled.img`
@@ -87,6 +103,10 @@ const ImageVatar = styled.img`
 
 const Name = styled.span`
     margin-right: 6px;
+    @media ${device.tabletS} {
+        font-size: 15px;
+        width: 65px;
+    }
 `
 
 const Desc = styled.div`
@@ -95,6 +115,9 @@ const Desc = styled.div`
     font-size: 20px;
     line-height: 27px;
     position: relative;
+    @media ${device.tablet} {
+        font-size: 17px;
+    }
 `
 
 const Topic = styled.p`
@@ -117,6 +140,9 @@ const OtherInfo = styled.div`
     align-items: center;
     justify-content: space-between;
     color: ${({ theme }) => theme.grey};
+    @media ${device.tablet} {
+        font-size: 13px;
+    }
 `
 
 const WrapperInfo = styled.div`
@@ -133,4 +159,32 @@ const Messages = styled.div`
 
 const Date = styled.div`
     
+`
+
+const WrapperEditable = styled.div`
+    display: flex; 
+    align-items: center;
+    gap: 24px;
+    @media ${device.tablet} {
+        gap: 15px;
+    }
+`
+
+const WrapperUser = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+const ImageEditable = styled.img`
+    position: absolute;
+    right: 60px;
+    z-index: 1;
+    top: 40px;
+`
+
+const ImageTrash = styled.img`
+    position: absolute;
+    right: 30px;
+    z-index: 1;
+    top: 40px;
 `

@@ -27,7 +27,7 @@ export const menuItem: Props[] = [
     },
     {
         title: 'Вопросы',
-        path: '/auth/login',
+        path: '/auth',
         id: 3
     },
     {

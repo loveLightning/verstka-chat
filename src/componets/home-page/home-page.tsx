@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import community from '../../assets/images/community.png'
 import { device } from '../../utils/constants'
 import { Container } from '../styles'
-import { Questions } from './questions'
+import { Questions } from '../questions'
 import { SideBar } from './side-bar'
 import list from '../../assets/images/list.svg'
 
@@ -23,7 +23,7 @@ export const HomePage = () => {
   return (
     <Container>
       <WrapperTitle>
-        <TitleLink to="/new-question">
+        <TitleLink to="/ask-question">
           <Title><Fragment>Задайте вопрос</Fragment> уютному сообществу <Image></Image> дизайнеров, вместе проще разобраться</Title>
         </TitleLink>
       </WrapperTitle>

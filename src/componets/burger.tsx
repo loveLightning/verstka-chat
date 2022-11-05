@@ -15,10 +15,10 @@ const StyledHamburger = styled.button<{ open: boolean }>`
 
   @media ${device.tablet} {
     width: 2rem;
-    position: absolute;
+    position: fixed;
     top: 45px;
     right: 30px;
-    z-index: ${({open}) => open ? '0' : '1'};
+    z-index: ${({open}) => open ? '3' : '2'};
   }
 
   div {
@@ -28,7 +28,8 @@ const StyledHamburger = styled.button<{ open: boolean }>`
     border-radius: 10px;
     transition: all 0.3s linear;
     transform-origin: 1px;
-    background-color: ${({ theme }) => theme.grey};
+    background-color: ${({ theme, open}) => open ? theme.white : theme.grey};
+    z-index: ${({open}) => open ? '3' : '2'};
     
     :first-child {
       transform: ${({ open }) =>

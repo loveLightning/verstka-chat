@@ -18,12 +18,10 @@ export const galleyImages: Props[] = [
         id: 1,
         src: secondMyPhoto,
         title: 'Image'
-
     },
     {
         id: 2,
         src: thirdMyPhoto,
         title: 'Image'
-
     }
 ]

@@ -1,11 +1,14 @@
-import React from 'react';
+import React from 'react'
+import { UserProvider } from './componets/context/user';
 import ScreensRoot from './routes/routes';
 
 function App() {
   return (
-    <div>
-      <ScreensRoot />
-    </div>
+    <UserProvider>
+      <div>
+        <ScreensRoot />
+      </div>
+    </UserProvider>
   );
 }
 
