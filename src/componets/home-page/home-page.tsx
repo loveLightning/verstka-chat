@@ -6,7 +6,7 @@ import { device } from '../../utils/constants'
 import { Container } from '../styles'
 import { Questions } from '../questions'
 import { SideBar } from './side-bar'
-import list from '../../assets/images/list.svg'
+import { SelectComponent } from '../select'
 
 export const HomePage = () => {
 
@@ -24,15 +24,10 @@ export const HomePage = () => {
     <Container>
       <WrapperTitle>
         <TitleLink to="/ask-question">
-          <Title><Fragment>Задайте вопрос</Fragment> уютному сообществу <Image></Image> дизайнеров, вместе проще разобраться</Title>
+          <Title><Fragment>Задайте вопрос</Fragment> уютному сообществу дизайнеров, <Image></Image> вместе проще разобраться</Title>
         </TitleLink>
       </WrapperTitle>
-      <AllCategories onClick={() => setActiveCategories(!activeCategories)}>
-        <WrapperCategories>
-          <TitleCategories>{topicTitle === 'Все' ? 'Все категории' : topicTitle}</TitleCategories>
-          <img src={list} alt="list" />
-        </WrapperCategories>
-      </AllCategories>
+      <SelectComponent />
       <Content>
         <SideBar activeCategories={activeCategories} isActive={isActiveTopic} selectItem={selectItem} />
         <Questions topicTitle={topicTitle} />
@@ -41,6 +36,20 @@ export const HomePage = () => {
   )
 }
 
+const Fragment = styled.span`
+  color: ${({ theme }) => theme.grey};
+  position: relative;
+  ::before {
+    transition: 0.4s ease all;
+    content: '';
+    border-bottom: ${({ theme }) => theme.grey} 1px solid;
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+  }
+`
+
 const Title = styled.h1`
   font-weight: 600;
   font-size: 64px;
@@ -48,21 +57,23 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.white};
   position: relative;
   margin-bottom: 70px;
+  transition: 0.4s ease all;
   @media ${device.tablet} {
     font-size: 40px;
+    line-height: 102.3%;
+    margin-bottom: 40px;
   }
-`
-
-const Fragment = styled.span`
-  color: ${({ theme }) => theme.grey};
-  position: relative;
-  ::before {
-    content: '';
-    border-bottom: ${({ theme }) => theme.grey} 1px solid;
-    display: block;
-    position: absolute;
-    bottom: 5px;
-    width: 100%;
+  @media ${device.tabletS} {
+    margin-bottom: 26px;
+    font-size: 37px;
+  }
+  :hover {
+    ${Fragment} {
+      ::before {
+        transition: 0.4s ease all;
+        opacity: 0;
+      }
+    }
   }
 `
 
@@ -78,41 +89,51 @@ const Image = styled.span`
   ::before {
     content: '';
     background-image: url(${community});
+    background-size: 146px 58px;
     width: 146px;
     height: 58px;
     display: inline-block;
     margin-bottom: -15px;
+    @media ${device.tablet} {
+      background-size: 110px 44px;
+      width: 110px;
+      height: 44px;
+    }
   }
 `
 
-const AllCategories = styled.div`
-  display: none;
-  width: 100%;
-  background-color: ${({ theme }) => theme.darkGrey};
-  margin: 0 auto;
-  height: 55px;
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 40px;
-  cursor: pointer;
-  @media ${device.tablet} {
-    display: block
-  }
-`
+// const AllCategories = styled.div`
+//   display: none;
+//   width: 100%;
+//   background-color: ${({ theme }) => theme.darkGrey};
+//   margin: 0 auto;
+//   height: 55px;
+//   border-radius: 16px;
+//   padding: 16px;
+//   margin-bottom: 40px;
+//   cursor: pointer;
+//   @media ${device.tablet} {
+//     display: block
+//   }
+//   @media ${device.mobileL} {
+//     margin-bottom: 16px;
+//   }
+// `
 
-const WrapperCategories = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
+// const WrapperCategories = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+//   justify-content: center;
   
-`
+// `
 
-const TitleCategories = styled.p`
-  color: ${({ theme }) => theme.white};
-  font-size: 17px;
-  line-height: 134.3%;
-`
+// const TitleCategories = styled.p`
+//   color: ${({ theme }) => theme.white};
+//   font-size: 17px;
+//   line-height: 134.3%;
+//   font-weight: 500;
+// `
 
 const Content = styled.div`
     display: flex;

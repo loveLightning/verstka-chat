@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { emoji, Props } from './types'
 import close from '../../assets/images/close.svg'
+import closeWhite from '../../assets/images/close-white.svg'
 import { Link } from 'react-router-dom'
 import { device } from '../../utils/constants'
 
@@ -25,7 +26,7 @@ export const HeaderEmoji = () => {
                 ))}
             </WrapperEmoji>
             <Link to='/'>
-                <Close src={close} alt='Close' />
+                <Close />
             </Link>
 
         </Wrapper>
@@ -55,9 +56,24 @@ const WrapperEmoji = styled.div`
 const Emoji = styled.img`
     position: relative;
     z-index: 1; 
+    width: 30px;
+    height: 30px;
+    user-select: none;
+    @media ${device.tablet} {
+        height: 20px;
+        width: 20px;
+    }
 `
 
-const Close = styled.img`
+const Close = styled.div`
+    transition: 0.4s ease all;
+    background-image: url(${close});
+    width: 19px;
+    height: 19px;
+    background-size: 19px 19px;
+    :hover {
+        background-image: url(${closeWhite});
+    }
 `
 
 const Input = styled.input`

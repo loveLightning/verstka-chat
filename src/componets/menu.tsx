@@ -76,7 +76,6 @@ export const MenuHeader: React.FC<Props> = ({ open, setOpen }) => {
   const [user, setUser] = useContext(UserContext)
 
   const logout = () => {
-    console.log(user)
     setUser({
         auth: ''
     })

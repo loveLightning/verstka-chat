@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import close from '../../assets/images/close.svg'
+import closeWhite from '../../assets/images/close-white.svg'
 import { Container } from '../../componets/styles'
 import { device } from '../../utils/constants'
 
@@ -16,7 +17,7 @@ export const HeaderAuth = () => {
                 </Links>
                 <div>
                     <Link to='/'>
-                        <Image src={close} alt='Close' />
+                        <Close />
                     </Link>
                 </div>
             </Header>
@@ -36,8 +37,15 @@ const Header = styled.div`
     }
 `
 
-const Image = styled.img`
-    
+const Close = styled.div`
+    transition: 0.4s ease all;
+    background-image: url(${close});
+    width: 19px;
+    height: 19px;
+    background-size: 19px 19px;
+    :hover {
+        background-image: url(${closeWhite});
+    }
 `
 
 const Links = styled.div`
@@ -55,7 +63,12 @@ const HeaderLink = styled(NavLink)`
     color: ${({ theme }) => theme.grey};
     font-size: 20px;
     line-height: 24px;
+    transition: 0.4s ease all;
+    font-weight: 500;
     &.active {
+        color: ${({theme}) => theme.white};
+    }
+    :hover {
         color: ${({theme}) => theme.white};
     }
 `

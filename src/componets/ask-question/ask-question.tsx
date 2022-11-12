@@ -52,7 +52,7 @@ export const AskQuestion: React.FC<{ title?: string }> = ({ title = 'Задат�
                                     <Label htmlFor="upload"><UploadImg src={upload} alt='Upload' /></Label>
                                     {handlers.values.file && <PreviewImage file={handlers.values.file} />}
                                 </WrapperImages>
-                                <ButtonSubmit title={title} value={!handlers.values.question} />
+                                <Button fixed={true} style={{position: "fixed", bottom: '40px', fontWeight: '600'}} title={title} value={!handlers.values.question} />
                             </Form>
                         )
                         }
@@ -69,6 +69,7 @@ const FormWrapper = styled.div`
 `
 
 const Title = styled.h2`
+    font-weight: 600;
     font-size: 30px;
     line-height: 134.3%;
     @media ${device.tablet} {
@@ -89,9 +90,15 @@ const TextArea = styled.textarea`
     resize: none;
     color: ${({ theme }) => theme.white};
     ::placeholder {
-        color: ${({ theme }) => theme.grey};
+        font-family: 'Gilroy';
+        color: ${({ theme }) => theme.placeholder};
         font-size: 20px;
+        font-weight: 600;
         line-height: 27px;
+        @media ${device.tabletS} {
+            font-size: 17px;
+            line-height: 134.3%;
+        }
     }
     ::-webkit-scrollbar {
     width: 5px;
@@ -114,6 +121,7 @@ const TitleImages = styled.p`
     font-size: 30px;
     line-height: 134.3%;
     margin-bottom: 20px;
+    font-weight: 500;
     @media ${device.tablet} {
         font-size: 24px;
     }
@@ -146,4 +154,8 @@ const WrapperImages = styled.div`
     align-items: center;
     gap: 14px;
     flex-wrap: wrap;
+`
+
+const Button = styled(ButtonSubmit)`
+ 
 `

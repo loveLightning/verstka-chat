@@ -42,10 +42,10 @@ export const Profile = () => {
                             <Error name="email" component="span" className="error" />
                         </WrapeprInput>
                         <WrapeprInput>
-                            <Input autoComplete="off" onBlur={handlers.handleBlur} placeholder='Ссылка на сайт' name='linkWebsite' type="email" onChange={handlers.handleChange} />
+                            <InputLink autoComplete="off" onBlur={handlers.handleBlur} placeholder='Ссылка на сайт' name='linkWebsite' type="email" onChange={handlers.handleChange} />
                             <Error name="linkWebsite" component="span" className="error" />
                         </WrapeprInput>
-                        <ButtonSubmit title="Сохранить" value={!handlers.isValid || !handlers.dirty} />
+                        <ButtonSubmit style={{color: '##404040'}} title="Сохранить" value={!handlers.isValid || !handlers.dirty} />
                     </Form>
                 )}
             </Formik>
@@ -93,8 +93,10 @@ const Input = styled(Field)`
     line-height: 96.3%;
     text-align: center;
     border-radius: 20px;
+    font-family: 'Gilroy';
+    font-weight: 600;
     ::placeholder {
-        color: ${({ theme }) => theme.grey};
+        color: ${({ theme }) => theme.placeholder};
         text-align: center;
         font-size: 48px;
         line-height: 96.3%;
@@ -107,6 +109,10 @@ const Input = styled(Field)`
         font-size: 20px;
         height: 50px;
     }
+`
+
+const InputLink = styled(Input)`
+    color: ${({theme}) => theme.link} !important;
 `
 
 const Error = styled(ErrorMessage)`

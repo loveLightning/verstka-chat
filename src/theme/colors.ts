@@ -4,5 +4,8 @@ export const theme = {
     darkGrey: '#191919',
     black: '#000000',
     light_black: '#292929',
-    red: 'red'
+    red: 'red',
+    grey_for_item: '#ACACAC',
+    placeholder: '#404040',
+    link: '#4FC631',
 }

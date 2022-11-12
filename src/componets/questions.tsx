@@ -6,6 +6,7 @@ import { questions } from './types'
 import trash from '../assets/images/trash.svg'
 import edit from '../assets/images/edit.svg'
 import { device } from '../utils/constants'
+import { useWindowDimension } from '../hooks'
 
 interface Props {
     topicTitle?: string
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const Questions: React.FC<Props> = ({ topicTitle = 'Все', editable = false }) => {
+    const { width } = useWindowDimension()
 
     return (
         <Wrapper>
@@ -31,12 +33,11 @@ export const Questions: React.FC<Props> = ({ topicTitle = 'Все', editable = f
                                     <WrapperUser>
                                         <ImageVatar src={el.url} alt="Avatar" />
                                         <Name>{el.name}</Name>
-                                        <img src={el.uriName} alt="Logo-name" />
+                                        <LogoName src={el.uriName} alt="Logo-name" />
                                     </WrapperUser>
                                 </User>
                                 <Desc>
-                                    <p>{el.desc.length < 209 ? el.desc : el.desc.split('').splice(0, 209).join('')}</p>
-                                    <Shadow></Shadow>
+                                    {width && width > 575 ? <TextQuestion>{el.desc.length < 209 ? el.desc : el.desc.split('').splice(0, 209).join('')}...</TextQuestion> : <TextQuestion>{el.desc.length < 137 ? el.desc : el.desc.split('').splice(0, 137).join('')}...</TextQuestion>}
                                 </Desc>
                                 <OtherInfo>
                                     <div>
@@ -50,7 +51,7 @@ export const Questions: React.FC<Props> = ({ topicTitle = 'Все', editable = f
                                             <img src={msg} alt="Message" />
                                         </Messages>
                                         <Date>
-                                            <span>{el.date}</span>
+                                            <DateSpan>{el.date}</DateSpan>
                                         </Date>
                                     </WrapperInfo>
                                 </OtherInfo>
@@ -76,6 +77,12 @@ const WrapperCard = styled.div`
 
 const Wrap = styled.div`
     padding: 30px;
+    @media ${device.tabletS} {
+        padding: 20px;
+    }
+    @media ${device.mobileL} {
+        padding: 16px;
+    }
 `
 
 const LinkCard = styled(Link)`
@@ -88,6 +95,13 @@ const Card = styled.div`
     color: ${({ theme }) => theme.white};
     width: 100%;
     position: relative;
+    transition: 0.4s ease all;
+    :hover {
+        background-color: #1D1D1D;
+    }
+    @media ${device.tabletS} {
+        border-radius: 16px;
+    }
 `
 
 const User = styled.div`
@@ -103,36 +117,32 @@ const ImageVatar = styled.img`
 
 const Name = styled.span`
     margin-right: 6px;
+    font-size: 20px;
+    font-weight: 500;
     @media ${device.tabletS} {
         font-size: 15px;
-        width: 65px;
+        white-space: nowrap;
     }
+`
+
+const LogoName = styled.img`
+
 `
 
 const Desc = styled.div`
     margin-bottom: 12px;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 27px;
     position: relative;
-    @media ${device.tablet} {
-        font-size: 17px;
-    }
 `
 
 const Topic = styled.p`
     color: ${({ theme }) => theme.grey};
     z-index: 12;
-`
-
-const Shadow = styled.div`
-    position: absolute;
-    background: linear-gradient(270deg, #191919 0%, rgba(25, 25, 25, 0) 61.53%, rgba(25, 25, 25, 0) 100%);
-    right: 40px;
-    width: 57px;
-    height: 23px;
-    bottom: 4px;
-    opacity: 0.6;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    @media ${device.mobileL} {
+        font-size: 13px;
+    }
 `
 
 const OtherInfo = styled.div`
@@ -155,6 +165,9 @@ const Messages = styled.div`
     display: flex;
     gap: 8px;
     align-items: center;
+    @media ${device.mobileL} {
+        font-size: 13px;
+    }
 `
 
 const Date = styled.div`
@@ -187,4 +200,24 @@ const ImageTrash = styled.img`
     right: 30px;
     z-index: 1;
     top: 40px;
+`
+
+const DateSpan = styled.span`
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: ${({ theme }) => theme.grey};
+    @media ${device.mobileL} {
+        font-size: 13px;
+    }
+`
+
+const TextQuestion = styled.p`
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    color: ${({ theme }) => theme.white};
+    @media ${device.tablet} {
+        font-size: 17px;
+    }
 `

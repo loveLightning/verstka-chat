@@ -6,6 +6,8 @@ interface ISideBarItem {
     title: string
     id: number
     path: string
+    value: string
+    label: string
 }
 
 export interface IQuestions {
@@ -23,82 +25,114 @@ export const sideBarItem: ISideBarItem[] = [
     {
         title: 'Все',
         id: 0,
-        path: ''
+        path: '',
+        value: 'Все',
+        label: 'Все'
     },
     {
         title: 'Визуал',
         id: 1,
-        path: ''
+        path: '',
+        value: 'Визуал',
+        label: 'Визуал'
     },
     {
         title: 'Насмотренность',
         id: 2,
-        path: ''
+        path: '',
+        value: 'Насмотренность',
+        label: 'Насмотренность'
     },
     {
         title: 'Проектирование',
         id: 3,
-        path: ''
+        path: '',
+        value: 'Проектирование',
+        label: 'ВПроектированиесе'
     },
     {
         title: 'Иконки',
         id: 4,
-        path: ''
+        path: '',
+        value: 'Иконки',
+        label: 'Иконки'
     },
     {
         title: 'Концепции',
         id: 5,
-        path: ''
+        path: '',
+        value: 'Концепции',
+        label: 'Концепции'
     },
     {
         title: 'Продуктовый подход',
         id: 6,
-        path: ''
+        path: '',
+        value: 'Продуктовый подход',
+        label: 'Продуктовый подход'
     },
     {
         title: 'Исследования',
         id: 7,
-        path: ''
+        path: '',
+        value: 'Исследования',
+        label: 'Исследования'
     },
     {
         title: 'Дизайн-инструменты',
         id: 8,
-        path: ''
+        path: '',
+        value: 'Дизайн-инструменты',
+        label: 'Дизайн-инструменты'
     },
     {
         title: 'Портфолио',
         id: 9,
-        path: ''
+        path: '',
+        value: 'Портфолио',
+        label: 'Портфолио'
     },
     {
         title: 'Коммуникация',
         id: 10,
-        path: ''
+        path: '',
+        value: 'Коммуникация',
+        label: 'Коммуникация'
     },
     {
         title: 'Управление',
         id: 11,
-        path: ''
+        path: '',
+        value: 'Управление',
+        label: 'Управление'
     },
     {
         title: 'Психология',
         id: 12,
-        path: ''
+        path: '',
+        value: 'Психология',
+        label: 'Психология'
     },
     {
         title: 'Управление временем',
         id: 13,
-        path: ''
+        path: '',
+        value: 'Управление временем',
+        label: 'Управление временем'
     },
     {
         title: 'Продажи',
         id: 14,
-        path: ''
+        path: '',
+        value: 'Продажи',
+        label: 'Продажи'
     },
     {
         title: 'Трудоустройство',
         id: 15,
-        path: ''
+        path: '',
+        value: 'Трудоустройство',
+        label: 'Трудоустройство'
     },
 ]
 

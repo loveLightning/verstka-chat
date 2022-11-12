@@ -23,11 +23,9 @@ export const Register = () => {
     const [user, setUser] = useContext(UserContext)
 
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-        console.log(values)
         setUser({
             auth: values.email
         })
-        console.log(user)
     }
 
     return (
@@ -51,7 +49,7 @@ export const Register = () => {
                             <Input onBlur={handlers.handleBlur} minLength={8} placeholder='Пароль' name='password' type="password" onChange={handlers.handleChange} />
                             <Error name="password" component="span" className="error" />
                         </WrapeprInput>
-                        <ButtonSubmit title="Зарегаться" value={!handlers.isValid || !handlers.dirty} />
+                        <ButtonSubmit style={{fontWeight: 600, color: '#404040'}} title="Зарегаться" value={!handlers.isValid || !handlers.dirty} />
                         <AnotherLogin>
                             <Social>Через соц. сети</Social>
                             <SocialWrapper>
@@ -93,11 +91,13 @@ const Input = styled(Field)`
     line-height: 96.3%;
     text-align: center;
     border-radius: 20px;
+    font-weight: 600;
     ::placeholder {
         color: ${({ theme }) => theme.grey};
         text-align: center;
         font-size: 48px;
         line-height: 96.3%;
+        color: ${({theme}) => theme.placeholder};
         @media ${device.tabletS} {
             font-size: 34px;
         }
@@ -118,6 +118,8 @@ const AnotherLogin = styled.div`
 
 const Social = styled.p`
     color: ${({ theme }) => theme.grey};
+    font-size: 16px;
+    font-weight: 500;
 `
 
 const SocialWrapper = styled.div`
@@ -128,6 +130,8 @@ const SocialWrapper = styled.div`
 
 const SocialLink = styled(Link)`
     color: ${({ theme }) => theme.white};
+    font-size: 20px;
+    font-weight: 20px;
 `
 const Error = styled(ErrorMessage)`
     color: ${({ theme }) => theme.red};

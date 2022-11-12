@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { IQuestions } from '../types'
-import msg from '../../assets/images/msg.svg'
 import { galleyImages } from './types'
 import { device } from '../../utils/constants'
 import { Link } from 'react-router-dom'
@@ -32,8 +31,7 @@ export const QuestionDesc: React.FC<Props> = ({ topic, item }) => {
                             </Wrap>
                         </User>
                         <Desc>
-                            <p>{item.desc}</p>
-                            <Shadow></Shadow>
+                            <TextQuestion>{item.desc}</TextQuestion>
                         </Desc>
                         <Gallery>
                             {galleyImages?.map(img => (
@@ -49,10 +47,6 @@ export const QuestionDesc: React.FC<Props> = ({ topic, item }) => {
                                 </Link>
                             </div>
                             <WrapperInfo>
-                                <Messages>
-                                    <span>{item.messages}</span>
-                                    <img src={msg} alt="Message" />
-                                </Messages>
                                 <Date>
                                     <span>{item.date}</span>
                                 </Date>
@@ -72,6 +66,9 @@ const Card = styled.div`
     width: 100%;
     color: ${({ theme }) => theme.white};
     margin: 0 auto;
+    @media ${device.tabletS} {
+        border-radius: 16px;
+    }
 `
 
 const Content = styled.div`
@@ -120,38 +117,25 @@ const ImageAvatar = styled.img`
 `
 
 const Asked = styled.p`
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
     color: ${({ theme }) => theme.grey};
 `
 
 const Name = styled.span`
     margin-right: 6px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 20px;
     line-height: 24px;
     @media ${device.mobileL} {
-        font-size: 16px;
+        font-size: 17px;
     }
 `
 
 const Desc = styled.div`
     margin-bottom: 12px;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 27px;
     position: relative;
-    @media ${device.mobileL} {
-        font-size: 14px;
-    }
-`
-
-const Shadow = styled.div`
-    position: absolute;
-    background: linear-gradient(270deg, #191919 0%, rgba(25, 25, 25, 0) 61.53%, rgba(25, 25, 25, 0) 100%);
-    right: 40px;
-    width: 57px;
-    height: 23px;
-    bottom: 4px;
-    opacity: 0.6;
 `
 
 const OtherInfo = styled.div`
@@ -166,6 +150,12 @@ const OtherInfo = styled.div`
 
 const Topic = styled.p`
     color: ${({ theme }) => theme.grey};
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    @media ${device.mobileL} {
+        font-size: 13px;
+    }
 `
 
 const WrapperInfo = styled.div`
@@ -174,13 +164,14 @@ const WrapperInfo = styled.div`
     gap: 16px;
 `
 
-const Messages = styled.div`
-    display: flex;
-    gap: 8px;
-    align-items: center;
+const Date = styled.div`
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    @media ${device.mobileL} {
+        font-size: 13px;
+    }
 `
-
-const Date = styled.div``
 
 const Gallery = styled.div`
     margin: 30px 0;
@@ -188,9 +179,32 @@ const Gallery = styled.div`
     gap: 14px;
     display: flex;
     flex-wrap: wrap;
+    @media ${device.mobileL} {
+        margin: 16px 0;
+        gap: 10px;
+    }
 `
 
 const ImageGallery = styled.img`
     border-radius: 10px;
     cursor: pointer;
+    @media ${device.mobileL} {
+        width: 90px;
+        height: 90px;
+    }
+    @media ${device.mobileM} {
+        width: 79px;
+        height: 79px;
+    }
+`
+
+const TextQuestion = styled.p`
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    color: ${({ theme }) => theme.white};
+    @media ${device.tablet} {
+        font-size: 17px;
+        line-height: 134.3%;
+    }
 `

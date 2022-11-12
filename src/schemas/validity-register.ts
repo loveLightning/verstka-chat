@@ -4,13 +4,13 @@ export const registerSchema = yup.object().shape({
     fullname: yup
     .string()
     .trim()
-    .required('Это обязательное поле')
+    .required('')
     .matches(
       /^\s*[\S]+(\s[\S]+)+\s*$/gms,
       'Введите имя и фамилию',
     ),
-    email: yup.string().email('Невалидный email').required("Это обязательное поле"),
+    email: yup.string().email('Невалидный email').required(""),
     password: yup.string()
-        .required("Это обязательное поле")
+        .required("")
         .min(8, "Пароль слишком короткий - должно быть не менее 8 символов"),
 })

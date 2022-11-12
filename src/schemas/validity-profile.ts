@@ -4,11 +4,11 @@ export const profileSchema = yup.object().shape({
     fullname: yup
     .string()
     .trim()
-    .required('Это обязательное поле')
+    .required('')
     .matches(
       /^\s*[\S]+(\s[\S]+)+\s*$/gms,
       'Введите имя и фамилию',
     ),
-    email: yup.string().email('Невалидный email').required("Это обязательное поле"),
+    email: yup.string().email('Невалидный email').required(""),
     linkWebsite: yup.string(),
 })

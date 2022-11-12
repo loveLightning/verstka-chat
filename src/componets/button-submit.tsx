@@ -2,20 +2,26 @@ import React from 'react'
 import styled from 'styled-components'
 import { device } from '../utils/constants'
 
-interface Props {
-    value: boolean
-    title: string
-}
+interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+    styles?: React.CSSProperties;
+    value?: boolean | undefined
+    title?: string | undefined
+    fixed?: boolean | undefined
+  }
 
-export const ButtonSubmit: React.FC<Props> = ({ value, title }) => {
+export const ButtonSubmit: React.FC<ButtonProps> = ({ value, title, fixed, ...styles }) => {
     return (
         <WrapperButton>
-            <Button disabled={value} type="submit">{title}</Button>
+            <Button fixed={fixed} {...styles} disabled={value} type="submit">{title}</Button>
         </WrapperButton>
     )
 }
 
-const Button = styled.button`
+interface Styled {
+    fixed: boolean | undefined 
+}
+
+const Button = styled.button<Styled>`
     display: block;
     background: #59DB39;
     border-radius: 20px;
@@ -40,6 +46,7 @@ const Button = styled.button`
     @media ${device.tablet} {
         height: 61px;
         font-size: 34px;
+        width: ${({fixed}) => fixed && '90%'};
     }
     @media ${device.tabletS} {
         margin-top: 40px;
