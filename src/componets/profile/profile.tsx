@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Formik } from 'formik'
 import React, { useContext } from 'react'
-import { Form } from 'formik'
 import styled from 'styled-components'
 import { device } from '../../utils/constants'
 import { ButtonSubmit } from '../button-submit'

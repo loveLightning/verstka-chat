@@ -79,6 +79,7 @@ export const MenuHeader: React.FC<Props> = ({ open, setOpen }) => {
     setUser({
         auth: ''
     })
+    setOpen(false)
 }
 
   return (
