@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserProvider } from './componets/context/user';
+import { UserProvider } from './componets/context';
 import ScreensRoot from './routes/routes';
 
 function App() {

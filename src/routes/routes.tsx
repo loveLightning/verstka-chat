@@ -1,8 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from '../layouts';
-import { HeaderAuth } from '../layouts';
-import { HomePageScreen, MyQuestionsScreen, ProfileScreen, RegAuthScreen, LoginAuthScreen, AskQuestionScreen, QuestionScreen, EditQuestionScreen, AboutUsScreen, SearchScreen, NotFound, ForgotPasswordScreen, StrangerProfileScreen } from '../pages';
+import { HomePageScreen, MyQuestionsScreen, ProfileScreen, AskQuestionScreen, QuestionScreen, EditQuestionScreen, AboutUsScreen, SearchScreen, NotFound, StrangerProfileScreen, LoginScreen } from '../pages';
 
 const ScreensRoot = () => (
     <Routes>
@@ -20,10 +19,8 @@ const ScreensRoot = () => (
             <Route path='/ask-question' element={<AskQuestionScreen />} />
             <Route path='/edit-question' element={<EditQuestionScreen />} />
         </Route>
-        <Route path='/' element={<HeaderAuth />}>
-            <Route path='/auth/login' element={<LoginAuthScreen />} />
-            <Route path='/auth/register' element={<RegAuthScreen />} />
-            <Route path='/auth/forgot' element={<ForgotPasswordScreen />} />
+        <Route path='/auth'>
+            <Route path='/auth' element={<LoginScreen />} />
         </Route>
     </Routes>
 );

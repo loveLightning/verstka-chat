@@ -7,6 +7,7 @@ import GlobalStyle from './global';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme'
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { registerSchema } from '../../schemas'
 import { device } from '../../utils/constants'
@@ -21,11 +21,12 @@ const initialValues = {
 
 export const Register = () => {
     const [user, setUser] = useContext(UserContext)
-
+    const navigate = useNavigate()
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         setUser({
             auth: values.email
         })
+        navigate('/')
     }
 
     return (
@@ -49,7 +50,7 @@ export const Register = () => {
                             <Input onBlur={handlers.handleBlur} minLength={8} placeholder='Пароль' name='password' type="password" onChange={handlers.handleChange} />
                             <Error name="password" component="span" className="error" />
                         </WrapeprInput>
-                        <ButtonSubmit style={{fontWeight: 600, color: '#404040'}} title="Зарегаться" value={!handlers.isValid || !handlers.dirty} />
+                        <ButtonSubmit style={{fontWeight: 600, color: '#404040', marginTop: 10}} title="Зарегаться" value={!handlers.isValid || !handlers.dirty} />
                         <AnotherLogin>
                             <Social>Через соц. сети</Social>
                             <SocialWrapper>
@@ -77,6 +78,9 @@ const WrapeprInput = styled.div`
     text-align: center;
     position: relative;
     margin-bottom: 20px;
+    @media ${device.tablet} {
+        margin-bottom: 0;
+    }
 `
 
 const Input = styled(Field)`
@@ -84,7 +88,7 @@ const Input = styled(Field)`
     border: none;
     color: ${({ theme }) => theme.white};
     width: 100%;
-    height: 86px;
+    height: 60px;
     border: none;
     outline: none;
     font-size: 48px;
@@ -93,18 +97,23 @@ const Input = styled(Field)`
     border-radius: 20px;
     font-weight: 600;
     ::placeholder {
-        color: ${({ theme }) => theme.grey};
+        font-family: 'Gilroy';
+        color: ${({ theme }) => theme.placeholder};
         text-align: center;
         font-size: 48px;
         line-height: 96.3%;
-        color: ${({theme}) => theme.placeholder};
-        @media ${device.tabletS} {
+        @media ${device.tablet} {
             font-size: 34px;
         }
     }
 
-    @media ${device.tabletS} {
+    @media ${device.tablet} {
         font-size: 34px;
+        width: 100%;
+        height: 60px;
+    }
+    @media ${device.tabletS} {
+        height: 50px;
     }
 `
 
@@ -113,7 +122,12 @@ const AnotherLogin = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
+    margin-top: 80px;
+    @media ${device.tablet} {
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
 `
 
 const Social = styled.p`

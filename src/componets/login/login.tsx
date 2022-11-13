@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { loginSchema } from '../../schemas'
 import { device } from '../../utils/constants'
@@ -19,10 +19,12 @@ const initialValues = {
 
 export const Login = () => {
     const [user, setUser] = useContext(UserContext)
+    const navigate = useNavigate()
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         setUser({
             auth: values.email
         })
+        navigate('/')
     }
 
     return (
@@ -31,6 +33,7 @@ export const Login = () => {
                 initialValues={initialValues}
                 onSubmit={onSubmit}
                 validationSchema={loginSchema}
+                validateOnBlur={true}
             >
                 {(handlers) => (
                     <Form>
@@ -42,7 +45,7 @@ export const Login = () => {
                             <Input onBlur={handlers.handleBlur} minLength={8} placeholder='Пароль' name='password' type="password" onChange={handlers.handleChange} />
                             <Error name="password" component="span" className="error" />
                         </WrapeprInput>
-                        <ButtonSubmit fixed={true} style={{ color: '#404040', fontFamily: 'Gilroy', fontWeight: '600' }} title="Войти" value={!handlers.isValid || !handlers.dirty} />
+                        <ButtonSubmit fixed={true} style={{ color: '#404040', fontFamily: 'Gilroy', fontWeight: '600', marginTop: 10}} title="Войти" value={!handlers.isValid || !handlers.dirty } />
                         <AnotherLogin>
                             <Social>Через соц. сети</Social>
                             <SocialWrapper>
@@ -60,7 +63,7 @@ export const Login = () => {
 }
 
 const Wrapper = styled.div`
-    margin-top: 90px;
+    margin-top: 114px;
 `
 
 const WrapeprInput = styled.div`
@@ -70,6 +73,9 @@ const WrapeprInput = styled.div`
     text-align: center;
     position: relative;
     margin-bottom: 20px;
+    @media ${device.tablet} {
+        margin-bottom: 0;
+    }
 `
 
 const Input = styled(Field)`
@@ -77,7 +83,7 @@ const Input = styled(Field)`
     border: none;
     color: ${({ theme }) => theme.white};
     width: 100%;
-    height: 86px;
+    height: 60px;
     border: none;
     outline: none;
     font-size: 48px;
@@ -89,15 +95,21 @@ const Input = styled(Field)`
     ::placeholder {
         color: ${({ theme }) => theme.placeholder};
         text-align: center;
+        font-family: 'Gilroy';
         font-size: 48px;
         line-height: 96.3%;
-        @media ${device.tabletS} {
+        @media ${device.tablet} {
             font-size: 34px;
         }
     }
 
-    @media ${device.tabletS} {
+    @media ${device.tablet} {
         font-size: 34px;
+        width: 100%;
+        height: 60px;
+    }
+    @media ${device.tabletS} {
+        height: 50px;
     }
 `
 
@@ -106,7 +118,12 @@ const AnotherLogin = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
+    margin-top: 80px;
+    @media ${device.tablet} {
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
 `
 
 const Social = styled.p`

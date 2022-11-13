@@ -4,12 +4,12 @@ import { device } from '../utils/constants'
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     styles?: React.CSSProperties;
-    value?: boolean | undefined
+    value?: any
     title?: string | undefined
     fixed?: boolean | undefined
   }
 
-export const ButtonSubmit: React.FC<ButtonProps> = ({ value, title, fixed, ...styles }) => {
+export const ButtonSubmit: React.FC<ButtonProps> = ({ value, title, fixed = false, ...styles }) => {
     return (
         <WrapperButton>
             <Button fixed={fixed} {...styles} disabled={value} type="submit">{title}</Button>
@@ -39,6 +39,7 @@ const Button = styled.button<Styled>`
     cursor: pointer;
     outline: none;
     border: none;
+    font-family: 'Gilroy';
     :disabled {
         background-color: ${({ theme }) => theme.darkGrey};
         color: ${({ theme }) => theme.grey};
@@ -57,5 +58,4 @@ const WrapperButton = styled.div`
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    margin-bottom: 100px;
 `

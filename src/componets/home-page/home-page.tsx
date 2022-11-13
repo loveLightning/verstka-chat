@@ -11,7 +11,7 @@ import { SelectComponent } from '../select'
 export const HomePage = () => {
 
   const [isActiveTopic, setIsActiveTopic] = useState<number>(0)
-  const [topicTitle, setTopicTitle] = useState<string>('Все')
+  const [topicTitle, setTopicTitle] = useState<string>('Все');
   const [activeCategories, setActiveCategories] = useState<boolean>(false)
 
   const selectItem = (id: number, el: string): void => {
@@ -27,7 +27,7 @@ export const HomePage = () => {
           <Title><Fragment>Задайте вопрос</Fragment> уютному сообществу дизайнеров, <Image></Image> вместе проще разобраться</Title>
         </TitleLink>
       </WrapperTitle>
-      <SelectComponent />
+      <SelectComponent topicTitle={topicTitle} setTopicTitle={setTopicTitle} />
       <Content>
         <SideBar activeCategories={activeCategories} isActive={isActiveTopic} selectItem={selectItem} />
         <Questions topicTitle={topicTitle} />
@@ -102,47 +102,10 @@ const Image = styled.span`
   }
 `
 
-// const AllCategories = styled.div`
-//   display: none;
-//   width: 100%;
-//   background-color: ${({ theme }) => theme.darkGrey};
-//   margin: 0 auto;
-//   height: 55px;
-//   border-radius: 16px;
-//   padding: 16px;
-//   margin-bottom: 40px;
-//   cursor: pointer;
-//   @media ${device.tablet} {
-//     display: block
-//   }
-//   @media ${device.mobileL} {
-//     margin-bottom: 16px;
-//   }
-// `
-
-// const WrapperCategories = styled.div`
-//   display: flex;
-//   align-items: center;
-//   gap: 10px;
-//   justify-content: center;
-  
-// `
-
-// const TitleCategories = styled.p`
-//   color: ${({ theme }) => theme.white};
-//   font-size: 17px;
-//   line-height: 134.3%;
-//   font-weight: 500;
-// `
-
 const Content = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     position: relative;
     gap: 40px;
-    margin-bottom: 150px;
-    @media ${device.mobileM} {
-      margin-bottom: 80px;
-    }
 `

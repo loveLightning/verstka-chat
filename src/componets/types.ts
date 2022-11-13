@@ -48,7 +48,7 @@ export const sideBarItem: ISideBarItem[] = [
         id: 3,
         path: '',
         value: 'Проектирование',
-        label: 'ВПроектированиесе'
+        label: 'Проектированиесе'
     },
     {
         title: 'Иконки',

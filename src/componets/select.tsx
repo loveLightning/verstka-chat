@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
 import { device } from '../utils/constants';
 import { sideBarItem } from './types';
 
-export const SelectComponent = () => {
-    const [selectedOption, setSelectedOption] = useState<string>('Все');
+interface Props {
+    setTopicTitle: (topicTitle: string) => void
+    topicTitle: string
+}
+
+export const SelectComponent: React.FC<Props> = ({ setTopicTitle, topicTitle }) => {
     const getValue = () => {
-        return selectedOption ? sideBarItem.find(c => c.value === selectedOption) : 's'
+        return topicTitle ? sideBarItem.find(c => c.value === topicTitle) : ''
     }
 
     const onChange = (newValue: any) => {
-        setSelectedOption(newValue)
+        setTopicTitle(newValue.value)
     }
 
     return (
@@ -38,29 +42,60 @@ const StyledSelect = styled(Select)`
     .Select__control {
         height: 55px;
         width: 100%;
-        border: ${({theme}) => theme.darkGrey} 1px solid ;
         border-radius: 16px;
         cursor: pointer;
-        background: ${({theme}) => theme.darkGrey};
-        color: ${({theme}) => theme.white} !important;
+        background: ${({ theme }) => theme.darkGrey};
         text-align: center;
+        outline: none;
+        box-shadow: none;
+        border: none;
+    }
+    .Select__single-value {
+        color: ${({ theme }) => theme.white};
+    }
+
+    .Select__value-container {
+        padding: 0;
+    }
+    .Select__control:hover {
+        outline: none;
+        border: none;
     }
     .Select__menu-list::-webkit-scrollbar {
         width: 4px;
         height: 0px;
     }
     .Select__menu-list::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: ${({ theme }) => theme.grey};
     }
     .Select__menu-list::-webkit-scrollbar-thumb {
-        background: #888;
+        background: ${({ theme }) => theme.white};
     }
     .Select__menu-list::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
 
-    .Select__control:hover {
-        border-color: ${({theme}) => theme.darkGrey};
+    .Select__indicators {
+        color: ${({ theme }) => theme.grey};
+    }
+
+    .Select__dropdown-indicator {
+        color: ${({ theme }) => theme.grey};
+    }
+
+    .Select__dropdown-indicator:hover {
+        color: ${({ theme }) => theme.grey};
+    }
+
+    .Select__menu {
+        margin: 0;
+    }
+    .Select__menu-list {
+        padding: 0;
+    }
+
+    .Select__control--menu-is-open {
+        border-radius: 16px 16px 0 0;
     }
 
     .Select__control--is-focused {
@@ -73,11 +108,13 @@ const StyledSelect = styled(Select)`
     }
 
     .Select__menu {
-        color: ${({theme}) => theme.white};
+        color: ${({ theme }) => theme.white};
     }
 
     .Select__option {
-        background: ${({theme}) => theme.darkGrey};
+        background: ${({ theme }) => theme.darkGrey};
     }
-
+    .Select__option:hover {
+        background: ${({ theme }) => theme.grey};
+    }
 `;

@@ -1,18 +1,19 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { Container } from '../../componets/styles'
 import logo from '../../assets/images/logo.svg'
 import { device } from '../../utils/constants'
 import { MenuHeader } from '../../componets'
-import { UserContext } from '../../componets/context/user'
 import search from '../../assets/images/search.svg'
 import activeSearch from '../../assets/images/active-search.svg'
+import { UserContext } from '../../componets/context/user'
 
 export const Layout: React.FC = () => {
     const [open, setOpen] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<boolean>(false)
     const [user, setUser] = useContext(UserContext)
+    const menuRef = useRef<HTMLDivElement>(null)
     const openMenuProfile = () => {
         setIsActive(!isActive)
     }
@@ -22,6 +23,26 @@ export const Layout: React.FC = () => {
             auth: ''
         })
     }
+
+    const onMouseEnter = () => {
+        if (menuRef.current !== null) {
+            menuRef.current.style.display = 'flex'
+        }
+    }
+
+    const onMouseLeave = () => {
+        if (menuRef.current !== null) {
+            menuRef.current.style.display = 'none'
+        }
+    }
+
+
+    const closeMenu = () => {
+        if (menuRef.current !== null) {
+            menuRef.current.style.display = 'none'
+        }
+    }
+
     return (
         <Wrapper>
             <Header >
@@ -38,20 +59,18 @@ export const Layout: React.FC = () => {
 
                             <Item>
                                 {user.auth ? <Wrap>
-                                    <StyledNavLinkProfile to='/profile' state={{ from: isActive }} onClick={openMenuProfile} >Андрей</StyledNavLinkProfile>
-                                    <MenuProfile>
-                                        <LinkProfile to='/my-questions'>Ваши вопросы</LinkProfile>
-                                        <LinkProfile to='/profile'>Личные данные</LinkProfile>
+                                    <StyledNavLinkProfile onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter} to='/profile' state={{ from: isActive }} onClick={openMenuProfile} >Андрей</StyledNavLinkProfile>
+                                    <MenuProfile onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter} ref={menuRef}>
+                                        <LinkProfile onClick={closeMenu} to='/my-questions'>Ваши вопросы</LinkProfile>
+                                        <LinkProfile onClick={closeMenu} to='/profile'>Личные данные</LinkProfile>
                                         <LinkProfile logout={"true"} onClick={logout} to='/'>Выйти</LinkProfile>
                                     </MenuProfile>
-                                </Wrap> : <StyledNavLinkLogin to="/auth/login">Войти</StyledNavLinkLogin>}
+                                </Wrap> : <StyledNavLinkLogin to="/auth">Войти</StyledNavLinkLogin>}
 
                                 <LinkSearch to="/search"></LinkSearch>
                                 <MenuHeader open={open} setOpen={setOpen} />
 
                             </Item>
-
-
                         </Menu>
                     </nav>
                 </Container>
@@ -99,6 +118,9 @@ const MenuProfile = styled.div`
     &:hover {
         display: flex;
     }
+    @media ${device.tablet} {
+        display: none !important;
+    }
 `
 
 const StyledNavLinkLogin = styled(StyledNavLink)`
@@ -110,16 +132,18 @@ const Wrap = styled.div`
     }
 `
 const StyledNavLinkProfile = styled(StyledNavLink)`
-    ::before {
-        content: '';
+    :hover::before {
         height: 40px;
         position: absolute;
         width: 90px;
         top: 10px;
         left: 50%;
         transform: translateX(-50%);
+    }
+    ::before {
+        content: '';
         :hover ${MenuProfile} {
-            display: flex;
+            display: flex !important;
         }
     }
 `
@@ -161,9 +185,6 @@ const Item = styled.li`
     display: flex;
     align-items: center;
     gap: 40px;
-    &:hover ${MenuProfile} {
-        display: flex;
-    }
 `
 
 const InfoLink = styled.div`
@@ -195,7 +216,6 @@ const LinkSearch = styled(StyledNavLink)`
 interface Styled {
     logout?: string
 }
-
 
 const LinkProfile = styled(Link) <Styled>`
     font-size: 30px;
