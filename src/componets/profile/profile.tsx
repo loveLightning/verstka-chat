@@ -44,7 +44,7 @@ export const Profile = () => {
                                 <InputLink autoComplete="off" onBlur={handlers.handleBlur} placeholder='Ссылка на сайт' name='linkWebsite' type="text" onChange={handlers.handleChange} />
                                 <Error name="linkWebsite" component="span" className="error" />
                             </WrapeprInput>
-                            <ButtonSubmit style={{ color: '#404040' }} title="Сохранить" value={!handlers.isValid || !handlers.dirty} />
+                            <ButtonSubmit style={{ color: '#404040', marginTop: 20}} title="Сохранить" value={!handlers.isValid || !handlers.dirty} />
                         </FormWrapper>
                     )}
                 </Formik>
@@ -69,11 +69,14 @@ const Wrapper = styled.div`
 
 const ProfileImage = styled.div`
     @media ${device.laptop} {
+        margin-top: 107px;
         margin-right: auto;
     }
 `
 
 const FormWrapper = styled.div`
+    max-width: 637px;
+    width: 100%;
     @media ${device.tablet} {
         width: 100%;
     }
@@ -85,7 +88,7 @@ const WrapeprInput = styled.div`
     margin: 0 auto;
     text-align: center;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-bottom: ${({ theme }) => theme.darkGrey} 1px solid; 
 `
 

@@ -142,6 +142,9 @@ const SocialLink = styled(Link)`
     color: ${({ theme }) => theme.white};
     font-size: 20px;
     font-weight: 20px;
+    @media ${device.tablet} {
+        font-size: 17px;
+    }
 `
 const Error = styled(ErrorMessage)`
     color: ${({ theme }) => theme.red};

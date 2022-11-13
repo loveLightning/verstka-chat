@@ -88,7 +88,7 @@ export const MenuHeader: React.FC<Props> = ({ open, setOpen }) => {
           <StyledLink to='/' onClick={() => close()}>Вопросы</StyledLink>
           <StyledLink to='/about-us' onClick={() => close()}>О проекте</StyledLink>
 
-          {user.auth ? <StyledLink to='/profile' onClick={() => close()}>Андрей</StyledLink> : <StyledLink to='/auth/login' onClick={() => close()}>Войти</StyledLink>}
+          {user.auth ? <StyledLink to='/profile' onClick={() => close()}>Андрей</StyledLink> : <StyledLink to='/auth' onClick={() => close()}>Войти</StyledLink>}
           
           {user.auth ? <>
             <StyledLink to='/my-questions' onClick={() => close()}>Ваши вопросы</StyledLink>
