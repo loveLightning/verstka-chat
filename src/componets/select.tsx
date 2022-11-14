@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { device } from '../utils/constants'
 import { sideBarItem } from './types'
 import arrow from '../assets/images/arrow.svg'
-import arrowFocus from '../assets/images/arrow-focus.svg'
 
 interface Props {
     setTopicTitle: (topicTitle: string) => void
@@ -49,6 +48,10 @@ const Select = styled.select`
     padding : 0 16px;
     background-position: calc(100% - 0.75rem) center !important;
     cursor: pointer;
+    font-family: 'Gilroy';
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 134.3%;
 `
 const Option = styled.option`
     color: ${({theme}) => theme.white};
