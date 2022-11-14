@@ -3,12 +3,7 @@ import * as yup from 'yup';
 export const registerSchema = yup.object().shape({
     fullname: yup
     .string()
-    .trim()
-    .required('')
-    .matches(
-      /^\s*[\S]+(\s[\S]+)+\s*$/gms,
-      'Введите имя и фамилию',
-    ),
+    .required(''),
     email: yup.string().email('Невалидный email').required(""),
     password: yup.string()
         .required("")
