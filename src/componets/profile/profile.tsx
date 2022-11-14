@@ -43,7 +43,7 @@ export const Profile = () => {
                                 <InputLink autoComplete="off" onBlur={handlers.handleBlur} placeholder='Ссылка на сайт' name='linkWebsite' type="text" onChange={handlers.handleChange} />
                                 <Error name="linkWebsite" component="span" className="error" />
                             </WrapeprInput>
-                            <ButtonSubmit style={{ color: '#404040', marginTop: 20}} title="Сохранить" value={!handlers.isValid || !handlers.dirty} />
+                            <ButtonSubmit style={{ marginTop: 20}} title="Сохранить" value={!handlers.isValid || !handlers.dirty} />
                         </FormWrapper>
                     )}
                 </Formik>

@@ -53,6 +53,11 @@ const Item = styled.p`
     font-weight: 600;
     font-size: 30px;
     line-height: 36px;
+    transition: 0.1s ease all;
+    :hover {
+        color: ${({theme}) => theme.white};
+    }
+
     @media ${device.laptop} {
         font-size: 25px
     }

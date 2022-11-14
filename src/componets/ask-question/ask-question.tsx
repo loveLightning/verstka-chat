@@ -52,7 +52,7 @@ export const AskQuestion: React.FC<{ title?: string }> = ({ title = 'Задат�
                                     <Label htmlFor="upload"><UploadImg src={upload} alt='Upload' /></Label>
                                     {handlers.values.file && <PreviewImage file={handlers.values.file} />}
                                 </WrapperImages>
-                                <Button fixed={true} style={{position: "fixed", bottom: '40px', fontWeight: '600'}} title={title} value={!handlers.values.question} />
+                                <Button style={{position: "fixed", bottom: '40px', fontWeight: '600'}} title={title} value={!handlers.values.question} />
                             </Form>
                         )
                         }
@@ -72,6 +72,7 @@ const Title = styled.h2`
     font-weight: 600;
     font-size: 30px;
     line-height: 134.3%;
+    
     @media ${device.tablet} {
         font-size: 24px;
     }
@@ -80,7 +81,6 @@ const Title = styled.h2`
 const TextArea = styled.textarea`
     width: 100%;
     background-color: ${({ theme }) => theme.black};
-    margin-top: 20px;
     border-color: ${({ theme }) => theme.black};
     padding: 16px;
     padding-left: 0px;
@@ -89,6 +89,7 @@ const TextArea = styled.textarea`
     outline: none;
     resize: none;
     color: ${({ theme }) => theme.white};
+    font-family: 'Gilroy';
     ::placeholder {
         font-family: 'Gilroy';
         color: ${({ theme }) => theme.placeholder};

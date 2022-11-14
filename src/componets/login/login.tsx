@@ -45,7 +45,7 @@ export const Login = () => {
                             <Input onBlur={handlers.handleBlur} minLength={8} placeholder='Пароль' name='password' type="password" onChange={handlers.handleChange} />
                             <Error name="password" component="span" className="error" />
                         </WrapeprInput>
-                        <ButtonSubmit fixed={true} style={{ color: '#404040', fontFamily: 'Gilroy', fontWeight: '600', marginTop: 10}} title="Войти" value={!handlers.isValid || !handlers.dirty } />
+                        <ButtonSubmit style={{ fontFamily: 'Gilroy', fontWeight: '600', marginTop: 10}} title="Войти" value={!handlers.isValid || !handlers.dirty } />
                         <AnotherLogin>
                             <Social>Через соц. сети</Social>
                             <SocialWrapper>

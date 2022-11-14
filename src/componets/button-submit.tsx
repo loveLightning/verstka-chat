@@ -42,12 +42,12 @@ const Button = styled.button<Styled>`
     font-family: 'Gilroy';
     :disabled {
         background-color: ${({ theme }) => theme.darkGrey};
-        color: ${({ theme }) => theme.grey};
+        color: ${({theme}) => theme.placeholder}
     }
     @media ${device.tablet} {
         height: 61px;
         font-size: 34px;
-        width: ${({fixed}) => fixed && '90%'};
+        width: ${({fixed}) => fixed && '93%'};
     }
     @media ${device.tabletS} {
         margin-top: 40px;

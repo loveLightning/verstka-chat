@@ -223,4 +223,8 @@ const LinkProfile = styled(Link) <Styled>`
     font-size: 30px;
     line-height: 36px;
     color: ${({ theme, logout }) => !logout ? theme.black : theme.red};
+    transition: 0.4s ease all;
+    :hover {
+        color: ${({ theme, logout }) => !logout && theme.menu};
+    }
 `

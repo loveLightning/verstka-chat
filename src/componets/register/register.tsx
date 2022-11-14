@@ -50,7 +50,7 @@ export const Register = () => {
                             <Input onBlur={handlers.handleBlur} minLength={8} placeholder='Пароль' name='password' type="password" onChange={handlers.handleChange} />
                             <Error name="password" component="span" className="error" />
                         </WrapeprInput>
-                        <ButtonSubmit style={{fontWeight: 600, color: '#404040', marginTop: 10}} title="Зарегаться" value={!handlers.isValid || !handlers.dirty} />
+                        <ButtonSubmit style={{fontWeight: 600, marginTop: 10}} title="Зарегаться" value={!handlers.isValid || !handlers.dirty} />
                         <AnotherLogin>
                             <Social>Через соц. сети</Social>
                             <SocialWrapper>

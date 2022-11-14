@@ -39,7 +39,7 @@ const Wrapper = styled.div`
     padding: 37px 0px 57px 0;
     justify-content: space-between;
     @media ${device.tablet} {
-        padding-bottom: 27px;
+        padding-bottom: 40px;
     }
 `
 
@@ -47,8 +47,8 @@ const WrapperEmoji = styled.div`
     display: flex;
     align-items: center;
     gap: 40px;
+    margin-left: 10px;
     @media ${device.tablet} {
-        padding-left: 10px;
         gap: 30px;
     }
 `
