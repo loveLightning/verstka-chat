@@ -204,11 +204,13 @@ const LinkSearch = styled(StyledNavLink)`
     :hover {
         background-image: url(${activeSearch});
     }
-
     @media ${device.tablet} {
+        display: block;
         position: absolute;
-        top: 45px;
-        right: 90px;
+        right: 62px;
+        height: 28px;
+        width: 28px;
+        background-size: 26px 26px;
     }
 
 `
