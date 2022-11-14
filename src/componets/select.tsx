@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { device } from '../utils/constants';
-import { sideBarItem } from './types';
+import React from 'react'
+import styled from 'styled-components'
+import { device } from '../utils/constants'
+import { sideBarItem } from './types'
 import arrow from '../assets/images/arrow.svg'
+import arrowFocus from '../assets/images/arrow-focus.svg'
 
 interface Props {
     setTopicTitle: (topicTitle: string) => void
@@ -13,14 +14,13 @@ export const SelectComponent: React.FC<Props> = ({ setTopicTitle, topicTitle }) 
 
     const changeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setTopicTitle(e.target.value);
-
     }
 
     return (
         <Wrapper>
             <Select value={topicTitle} onChange={(e) => changeSelect(e)}>
                 {sideBarItem?.map(el => (
-                    <Option>{el.title}</Option>
+                    <Option key={el.id}>{el.title}</Option>
                 ))}
             </Select>
         </Wrapper>
@@ -43,29 +43,16 @@ const Select = styled.select`
     border: none;
     outline: none;
     color: ${({theme}) => theme.white};
-    text-align: center;
     appearance: none;
-    border-radius: 16px;
-    background: ${({theme}) => theme.darkGrey};
-    position: relative;
-    :focus {
-        outline: none;
-        border-radius: none;
-    }
-    ::after {
-        display: block;
-        content: '';
-        height: 30px;
-        width: 30px;
-        background: url(${arrow}) no-repeat;
-        position: absolute;
-        z-index: 100;
-    }
+    text-align: left;
+    background: url(${arrow}) no-repeat right;
+    padding : 0 16px;
+    background-position: calc(100% - 0.75rem) center !important;
+    cursor: pointer;
 `
 const Option = styled.option`
     color: ${({theme}) => theme.white};
-    text-align: center;
-    background: ${({theme}) => theme.grey};
+    background: ${({theme}) => theme.darkGrey};
 `
 
 
