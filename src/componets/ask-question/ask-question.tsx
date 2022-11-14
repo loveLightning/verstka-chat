@@ -40,7 +40,7 @@ export const AskQuestion: React.FC<{ title?: string }> = ({ title = 'Задат�
                                     name='question'
                                     cols={30}
                                     placeholder={'Введите текст'}
-                                    rows={6}
+                                    rows={9}
                                     onChange={handlers.handleChange}
                                 />
                                 <TitleImages>Картинки</TitleImages>
@@ -52,7 +52,7 @@ export const AskQuestion: React.FC<{ title?: string }> = ({ title = 'Задат�
                                     <Label htmlFor="upload"><UploadImg src={upload} alt='Upload' /></Label>
                                     {handlers.values.file && <PreviewImage file={handlers.values.file} />}
                                 </WrapperImages>
-                                <Button style={{position: "fixed", bottom: '40px', fontWeight: '600'}} title={title} value={!handlers.values.question} />
+                                <Button fixed={true} style={{position: "fixed", bottom: '40px', fontWeight: '600'}} title={title} value={!handlers.values.question} />
                             </Form>
                         )
                         }
