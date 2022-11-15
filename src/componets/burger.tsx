@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../utils/constants";
 
-const StyledHamburger = styled.button<{ open: boolean }>`
+const StyledHamburger = styled.button<Styled>`
   height: 26px;
   padding: 0;
   background: transparent;
@@ -15,12 +15,14 @@ const StyledHamburger = styled.button<{ open: boolean }>`
 
   @media ${device.tablet} {
     position: fixed;
-    top: 45px;
+    top: 50px;
     right: 30px;
-    z-index: ${({open}) => open ? '3' : '2'};
+    z-index: ${({ open }) => open ? '3' : '2'};
+    display: ${({isActiveSearch}) => !isActiveSearch && 'none'};
   }
   @media ${device.tabletS} {
     top: 25px;
+    right: 12px;
   }
 
   div {
@@ -30,8 +32,8 @@ const StyledHamburger = styled.button<{ open: boolean }>`
     border-radius: 2px;
     transition: all 0.3s linear;
     transform-origin: 1px;
-    background-color: ${({ theme, open}) => open ? theme.white : theme.grey};
-    z-index: ${({open}) => open ? '3' : '2'};
+    background-color: ${({ theme}) => theme.grey};
+    z-index: ${({ open }) => open ? '3' : '2'};
     
     :first-child {
       transform: ${({ open }) =>
@@ -48,12 +50,19 @@ const StyledHamburger = styled.button<{ open: boolean }>`
 `;
 
 interface Props {
-  open: boolean;
-  setOpen: (v: boolean) => void;
-};
+  open: boolean
+  setOpen: (v: boolean) => void
+  isActiveSearch?: boolean
+}
 
-export const Hamburger: React.FC<Props> = ({ open, setOpen }) => (
+interface Styled {
+  isActiveSearch?: boolean
+  open?: boolean
+}
+
+export const Hamburger: React.FC<Props> = ({ open, setOpen, isActiveSearch }) => (
   <StyledHamburger
+    isActiveSearch={isActiveSearch}
     open={open}
     onClick={() => setOpen(!open)}
   >

@@ -41,6 +41,9 @@ const Wrapper = styled.div`
     @media ${device.tablet} {
         padding-bottom: 40px;
     }
+    @media ${device.tabletS} {
+        padding-top: 25px;
+    }
 `
 
 const WrapperEmoji = styled.div`

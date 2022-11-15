@@ -8,5 +8,8 @@ export const theme = {
     grey_for_item: '#ACACAC',
     placeholder: '#404040',
     link: '#4FC631',
-    menu: '#424242'
+    menu: '#424242',
+    green: '#59DB39',
+    separator: '#282828',
+    extra_black: '#000000'
 }
