@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { device } from "../utils/constants";
 
@@ -42,13 +42,14 @@ interface Styled {
   active?: string
   activeGrey?: string
 }
-const StyledLink = styled(Link)<Styled>`
+const StyledLink = styled(NavLink)<Styled>`
   width: fit-content;
   font-size: 2rem;
   text-decoration: none;
   color: ${({ theme }) => theme.white};
-  color: ${({theme, active}) => active && theme.green};
-  color: ${({theme, activeGrey}) => activeGrey && theme.placeholder};
+  &.active{
+    color: ${({theme}) => theme.green};
+  }
   font-size: 34px;
   line-height: 96.3%;
   :hover {
@@ -58,6 +59,9 @@ const StyledLink = styled(Link)<Styled>`
     font-size: 32px;
   }
 `;
+const StyledLinkClose = styled(StyledLink)`
+  color: ${({theme, activeGrey}) => activeGrey && theme.placeholder} !important;
+`
 const MenuWrapper = styled.div<{ open: boolean }>`
   transition: 0.3s ease all;
   opacity: ${({ open }) => open ? 1 : 0};
@@ -117,15 +121,15 @@ export const MenuHeader: React.FC<Props> = ({ open, setOpen, isActiveSearch }) =
         <StyledMenu open={open} >
           
           {user.auth ? <Wrap>
-            <StyledLink active={'true'} to='/' onClick={() => close()}>Вопросы</StyledLink>
+            <StyledLink end to='/' onClick={() => close()}>Вопросы</StyledLink>
             <StyledLink to='/about-us' onClick={() => close()}>О проекте</StyledLink>
             <Separator />
             <StyledLink to='/my-questions' onClick={() => close()}>Ваши вопросы</StyledLink>
             <StyledLink to='/profile' onClick={() => close()}>Личные данные</StyledLink>
-            <StyledLink activeGrey="true" onClick={logout} to='/'>Выйти</StyledLink>
+            <StyledLinkClose activeGrey="true" onClick={logout} to='/'>Выйти</StyledLinkClose>
           </Wrap> : <Wrap>
             <StyledLink to='/auth' onClick={() => close()}>Вход</StyledLink>
-            <StyledLink active={'true'} to='/' onClick={() => close()}>Вопросы</StyledLink>
+            <StyledLink end to='/' onClick={() => close()}>Вопросы</StyledLink>
             <StyledLink to='/about-us' onClick={() => close()}>О проекте</StyledLink>
           </Wrap>}
         </StyledMenu>
